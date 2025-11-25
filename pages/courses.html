@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillStack - Learn & Grow</title>
+    <link rel="shortcut icon" href="../assets/skill-stack icon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+      * {
+     margin:0; 
+    padding:0;
+     box-sizing:border-box; 
+    font-family:'Poppins',sans-serif; 
+}
+
+/* Navbar */
+.navbar { 
+    background:#004aad;
+     color:white;
+      padding:15px 50px; 
+      display:flex;
+       justify-content:space-between;
+        align-items:center; 
+    }
+
+.navbar a, .logout-btn {
+     color:white;
+      margin-left:20px;
+       text-decoration:none;
+        font-weight:500;
+     }
+
+.btn-login, .logout-btn { 
+    background:white; 
+    color:#004aad!important;
+     padding:8px 14px;
+      border-radius:6px; 
+     }
+
+
+      .container { 
+    display:grid; 
+    background: url(../assets/6084414.jpg);
+    background-size: contain;
+    gap:20px;
+    grid-template-columns:250px 1fr;
+     padding:30px;
+
+     }
+
+
+/* Sidebar */
+.sidebar {
+    background:url(../assets/OR7TUP0.jpg); 
+    padding:20px;
+     border-radius:10px;
+      height:100%;
+      word-wrap: inherit;
+    
+     }
+
+.sidebar h3{
+     margin-bottom: 20px;
+}
+
+.sidebar ul li {
+     list-style:none; 
+     padding:10px 0; 
+     font-size:0.95rem;
+      cursor:pointer;
+     }
+
+.sidebar ul li i {
+     margin-right:8px;
+     color:#004aad;
+     }
+
+     .sidebar ul li a {
+   
+           text-decoration: none;
+           color:#444;
+     }
+     
+
+/* Course Cards */
+main h2{
+     
+     margin-bottom: 20px;
+     text-align: center;
+}
+.card-grid {
+     display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+       gap:20px;
+}
+
+.course-card {
+     background:rgba(255, 255, 255, 0.822); 
+     padding:15px;
+      border-radius:12px; 
+      text-align:center;
+       transition:all 0.6s;
+        box-shadow:0 3px 15px rgb(65, 6, 6);
+     }
+
+.course-card:hover {
+     transform:translateY(-10px);
+    
+     }
+
+.course-card:hover {
+     
+     box-shadow:10px 20px 14px rgb(0, 0, 0);
+    background: white;
+
+     }
+
+
+.course-card img {
+     width:100%; 
+     height: 170px;
+     border-radius:10px;
+     }
+
+.course-card h3 {
+     margin:10px 0;
+      font-size:18px;
+       color:#004aad;
+     }
+
+.course-card p {
+     font-size:14px;
+      color:#666;
+
+     }
+
+
+/* Progress Bar */
+.progress {
+
+     width:100%;
+     background:#eee; 
+     height:15px;
+      border-radius:6px;
+       margin:10px 0;
+        overflow:hidden;
+
+     }
+
+.progress div { 
+    height:100%;
+     background:	#174455;
+      border-radius:6px;
+     }
+
+.progress-text { 
+    font-size:12px; 
+    color:#555; 
+    margin-bottom:8px;
+     display:block;
+     }
+
+
+.btn { 
+    text-decoration:none;
+     background:#004aad;
+      color:white; 
+      padding:8px 14px;
+       border-radius:6px;
+        display:inline-block;
+         margin-top:5px; }
+
+
+.btn:hover{
+   transform: scale(1.1);
+   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+}
+  /* Footer */
+
+footer {
+  background: #0f172a;
+  color: #fff;
+  padding: 40px 0 15px;
+  margin-top: 50px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.footer-container div {
+  width: 250px;
+}
+
+.footer-about p,
+.footer-contact p {
+  font-size: 14px;
+  line-height: 20px;
+}
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #334155;
+  padding-top: 10px;
+  font-size: 14px;
+}     
+    </style>
+      
+</head>
+<body>
+
+        <header class="navbar">
+        <div class="logo">SkillStack <span>📚</span></div>
+        <nav>
+        <a href="../index.html">Home</a>
+        <a href="./About-index.html">About</a>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+        </nav>
+        </header>
+
+    <div class="container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3>Categories</h3>
+    <ul>
+      <li><i class="fas fa-code"></i><a href="#course">HTML & CSS Basics</a></li>
+      <li><i class="fas fa-terminal"></i><a href="#course">JavaScript Essentials</a></li>
+      <li><i class="fas fa-paint-brush"></i><a href="#course">Python Programming</a></li>
+      <li><i class="fas fa-mobile-alt"></i><a href="#course">React Development</a></li>
+      <li><i class="fas fa-network-wired"></i><a href="#course">Bootstrap & UI Design</a></li>
+      <li><i class="fas fa-cloud"></i><a href="#course">Linux Fundamentals</a></li>
+      <li><i class="fas fa-shield"></i><a href="#course">Cyber Security Basics</a></li>
+      <li><i class="fas fa-shield"></i><a href="#course">Ethical Hacking</a></li>
+      <li><i class="fas fa-network-wired"></i><a href="#course">UI/UX Designing</a></li>
+      <li><i class="fas fa-mobile-alt"></i><a href="#course">Android App Dev</a></li>
+      <li><i class="fas fa-shield"></i><a href="#course">Networks & Security</a></li>
+      <li><i class="fas fa-cloud"></i><a href="#course">Data Structures</a></li>
+      <li><i class="fas fa-code"></i><a href="#course">Node JS</a></li>
+      <li><i class="fas fa-terminal"></i><a href="#course">Java</a></li>
+      <li><i class="fas fa-terminal"></i><a href="#course">C Programming</a></li>
+      <li><i class="fas fa-code"></i><a href="#course">C++</a></li>
+      <li><i class="fas fa-code"></i><a href="#course">SQL Database</a></li>
+      <li><i class="fas fa-code"></i><a href="#course">MongoDB</a></li>
+      <li><i class="fas fa-mobile-alt"></i><a href="#course">Git & GitHub</a></li>
+      <li><i class="fas fa-cloud"></i><a href="#course">Data Structures</a></li>      
+      <li><i class="fas fa-paint-brush"></i><a href="#course">Tailwind CSS</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <h2 id="course">Popular Courses</h2>
+
+    <div class="card-grid">
+
+      <!-- CARD 1 -->
+      <div id="course-1" class="course-card">
+        <img src="../assets/cards-img/card-1-img.jpg">
+        <h3>HTML & CSS Basics</h3>
+        <p>Build your first website.</p>
+        <div class="progress"><div style="width: 60%"></div></div>
+        <span class="progress-text">60% Complete</span>
+        <a href="https://www.w3schools.com/html/html_css.asp" target="_blank" class="btn">Start Learning</a>
+      </div>
+
+      <!-- CARD 2 -->
+      <div id="course-2" class="course-card">
+        <img src="../assets/cards-img/js-essential-card-2-img.jpg">
+        <h3>JavaScript Essentials</h3>
+        <p>Make websites interactive.</p>
+        <div class="progress"><div style="width: 40%"></div></div>
+        <span class="progress-text">40% Complete</span>
+        <a href="https://www.w3schools.com/js/" target="_blank" class="btn">Start Learning</a>
+      </div>
+
+      <!-- CARD 3 -->
+      <div id="course-3" class="course-card">
+        <img src="../assets/cards-img/python-card-3-img.jpg">
+        <h3>Python Programming</h3>
+        <p>Solve problems like a pro!</p>
+        <div class="progress"><div style="width: 75%"></div></div>
+        <span class="progress-text">75% Complete</span>
+        <a href="https://www.w3schools.com/python/default.asp" target="_blank" class="btn">Start Learning</a>
+      </div>
+
+      <!-- CARD 4 -->
+      <div id="course-4" class="course-card">
+        <img src="../assets/cards-img/react-card-4-img.jpg">
+        <h3>React Development</h3>
+        <p>Modern Frontend power.</p>
+        <div class="progress"><div style="width: 20%"></div></div>
+        <span class="progress-text">20% Complete</span>
+        <a href="https://www.w3schools.com/REACT/DEFAULT.ASP" target="_blank" class="btn">View Course</a>
+      </div>
+
+      <!-- CARD 5 -->
+      <div id="course-5" class="course-card">
+        <img src="../assets/cards-img/bhoot-ui-card-5-img.jpg">
+        <h3>Bootstrap & UI Design</h3>
+        <p>Responsive Designs Made Easy.</p>
+        <div class="progress"><div style="width: 50%"></div></div>
+        <span class="progress-text">50% Complete</span>
+        <a href="https://www.w3schools.com/bootstrap/" target="_blank" class="btn">View Course</a>
+      </div>
+
+      <!-- CARD 6 -->
+      <div id="course-6" class="course-card">
+        <img src="../assets/cards-img/linux fun-card-6-img.jpg">
+        <h3>Linux Fundamentals</h3>
+        <p>Control the system.</p>
+        <div class="progress"><div style="width: 30%"></div></div>
+        <span class="progress-text">30% Complete</span>
+        <a href="https://www.geeksforgeeks.org/linux-unix/linux-tutorial/" target="_blank" class="btn">View Course</a>
+      </div>
+
+      <!-- CARD 7 -->
+      <div id="course-7" class="course-card">
+        <img src="../assets/cards-img/syber-card-7-img.jpg">
+        <h3>Cyber Security Basics</h3>
+        <p>Protect your data.</p>
+        <div class="progress"><div style="width: 10%"></div></div>
+        <span class="progress-text">10% Complete</span>
+        <a href="https://www.w3schools.com/cybersecurity/" target="_blank" class="btn">View Course</a>
+      </div>
+
+      <!-- CARD 8 -->
+      <div id="course-8" class="course-card">
+        <img src="../assets/cards-img/ethical hack-card-8-img.jpg">
+        <h3>Ethical Hacking</h3>
+        <p>Hack like a hero.</p>
+        <div class="progress"><div style="width: 5%"></div></div>
+        <span class="progress-text">5% Complete</span>
+        <a href="https://www.eccouncil.org/cybersecurity-exchange/ethical-hacking/what-is-ethical-hacking/" target="_blank" class="btn">View Course</a>
+      </div>
+
+      <!-- CARD 9 -->
+      <div id="course-9" class="course-card">
+        <img src="../assets/cards-img/ui-ux-card-9-img.jpg">
+        <h3>UI/UX Designing</h3>
+        <p>Beautiful & useful designs.</p>
+        <div class="progress"><div style="width: 35%"></div></div>
+        <span class="progress-text">35% Complete</span>
+        <a href="https://www.geeksforgeeks.org/blogs/100-days-of-ui-ux/" target="_blank" class="btn">View Course</a>
+
+      </div>
+
+      <!-- CARD 10 -->
+      <div id="course-10" class="course-card">
+        <img src="../assets/cards-img/androidapp-card-10-img.jpg">
+        <h3>Android App Dev</h3>
+        <p>Build apps for PlayStore.</p>
+        <div class="progress"><div style="width: 0%"></div></div>
+        <span class="progress-text">0% Complete</span>
+        <a href="https://www.geeksforgeeks.org/android/android-tutorial/" target="_blank"class="btn">View Course</a>
+      </div>
+
+      <!-- CARD 11 -->
+      <div id="course-11" class="course-card">
+        <img src="../assets/cards-img/net and sec-card-11-img.jpg">
+        <h3>Networks & Security</h3>
+        <p>Secure connections.</p>
+        <div class="progress"><div style="width: 0%"></div></div>
+        <span class="progress-text">0% Complete</span>
+        <a href="https://www.w3schools.com/cybersecurity/" target="_blank" class="btn">View Course</a>
+      </div>
+
+      <!-- CARD 12 -->
+      <div id="course-12" class="course-card">
+        <img src="../assets/cards-img/data structure-card-12-img.png">
+        <h3>Data Structures</h3>
+        <p>Crack tech interviews.</p>
+        <div class="progress"><div style="width: 0%"></div></div>
+        <span class="progress-text">0% Complete</span>
+        <a href="https://www.w3schools.com/dsa/" target="_blank" class="btn">View Course</a>
+      </div>
+
+      <!-- CARD 13 -->
+      <div id="course-13" class="course-card">
+      <img src="../assets/cards-img/Node JS card-13.jpeg">
+      <h3>Node JS</h3>
+      <p>Backend JavaScript runtime.</p>
+      <div class="progress"><div style="width: 0%"></div></div>
+      <span class="progress-text">0% Complete</span>
+      <a href="https://www.w3schools.com/nodejs/" target="_blank" class="btn">Start Learning</a>
+      </div>
+
+      <!-- CARD 14 -->
+      <div id="course-14" class="course-card">
+      <img src="../assets/cards-img/Java card-14.jpeg">
+      <h3>Java</h3>
+      <p>Strong OOP programming.</p>
+      <div class="progress"><div style="width: 40%"></div></div>
+      <span class="progress-text">40% Complete</span>
+      <a href="https://www.w3schools.com/java/" target="_blank" class="btn">Start Learning</a>
+      </div>
+
+      <!-- CARD 15 -->
+      <div id="course-15" class="course-card">
+      <img src="../assets/cards-img/C Programming card-15.jpeg">
+      <h3>C Programming</h3>
+      <p>The mother of all languages.</p>
+      <div class="progress"><div style="width: 15%"></div></div>
+      <span class="progress-text">15% Complete</span>
+      <a href="https://www.w3schools.com/c/" target="_blank" class="btn">Start Learning</a>
+      </div>
+
+      <!-- CARD 16 -->
+      <div id="course-16" class="course-card">
+      <img src="../assets/cards-img/C++ Programming card-16.jpeg">
+      <h3>C++ Programming</h3>
+      <p>High-performance coding.</p>
+      <div class="progress"><div style="width: 60%"></div></div>
+      <span class="progress-text">60% Complete</span>
+      <a href="https://www.w3schools.com/cpp/" target="_blank" class="btn">Start Learning</a>
+      </div>
+
+      <!-- CARD 17 -->
+      <div id="course-17" class="course-card">
+      <img src="../assets/cards-img/SQL Database card-17.png">
+      <h3>SQL Database</h3>
+      <p>Store & manage data.</p>
+      <div class="progress"><div style="width: 25%"></div></div>
+      <span class="progress-text">25% Complete</span>
+      <a href="https://www.w3schools.com/sql/" target="_blank" class="btn">Start Learning</a>
+      </div>
+
+      <!-- CARD 18 -->
+      <div id="course-18" class="course-card">
+      <img src="../assets/cards-img/MongoDB card-18.png">
+      <h3>MongoDB</h3>
+      <p>NoSQL database system.</p>
+      <div class="progress"><div style="width: 8%"></div></div>
+      <span class="progress-text">8% Complete</span>
+      <a href="https://www.mongodb.com/docs/" target="_blank" class="btn">Start Learning</a>
+      </div>
+
+
+      <!-- CARD 19 -->
+      <div id="course-19" class="course-card">
+      <img src="../assets/cards-img/Git & GitHub card-19.jpeg">
+      <h3>Git & GitHub</h3>
+      <p>Version control system.</p>
+      <div class="progress"><div style="width: 10%"></div></div>
+      <span class="progress-text">10% Complete</span>
+      <a href="https://www.w3schools.com/git/" target="_blank" class="btn">Start Learning</a>
+      </div>
+
+      <!-- CARD 20 -->
+      <div id="course-20" class="course-card">
+      <img src="../assets/cards-img/Full Stack Development card-20.png">
+      <h3>Full Stack Development</h3>
+      <p>Become a complete developer!</p>
+      <div class="progress"><div style="width: 10%"></div></div>
+      <span class="progress-text">10% Complete</span>
+      <a href="https://www.w3schools.com/whatis/" target="_blank" class="btn">Start Learning</a>
+      </div>
+
+      <!-- CARD 21 -->
+      <div id="course-21" class="course-card">
+      <img src="../assets/cards-img/Tailwind CSS card-21.png">
+      <h3>Tailwind CSS</h3>
+      <p>Utility-first CSS framework.</p>
+      <div class="progress"><div style="width: 5%"></div></div>
+      <span class="progress-text">5% Complete</span>
+      <a href="https://tailwindcss.com/docs/" target="_blank" class="btn">Start Learning</a>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+    <div class="footer-container">
+
+    <div class="footer-about">
+      <h3>SkillStack</h3>
+      <p>Learn new skills and grow your career with high-quality online courses.</p>
+    </div>
+
+    <div class="footer-contact">
+      <h4>Contact Us</h4>
+      <p>Email: support@skillstack.com</p>
+      <p>Phone: +91 12345 67890</p>
+    </div>
+
+  </div>
+
+ <div class="footer-bottom">
+    <p>© 2025 SkillStack. All Rights Reserved.</p>
+  </div>
+
+</footer>
+
+<script>
+// Redirect if user not logged in
+if (!localStorage.getItem("currentUser")) {
+    window.location.href = "../index.html"; 
+}
+
+function logout() {
+    localStorage.removeItem("currentUser");
+    window.location.href = "../index.html";
+}
+</script>
+
+</body>
+</html>

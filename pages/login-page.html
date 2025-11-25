@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillStack - Login and Register</title>
+    <link rel="shortcut icon" href="../assets/skill-stack icon.png" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-btn:hover {
+            color: #667eea;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            color: #999;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        input.error {
+            border-color: #ff6b6b;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        .message {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .info-text {
+            font-size: 13px;
+            color: #666;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .logged-in-section {
+            display: none;
+            text-align: center;
+        }
+
+        .logged-in-section.show {
+            display: block;
+        }
+
+        .welcome-message {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .user-email {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 20px;
+        }
+
+        .logout-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="register">Register</button>
+            <button class="tab-btn" data-tab="login">Login</button>
+        </div>
+
+        <!-- Register Section -->
+        <div id="register" class="form-section active">
+            <h2>Create Account</h2>
+            <p class="subtitle">Join us today</p>
+            <div id="register-message" class="message"></div>
+
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="reg-name">Full Name</label>
+                    <input type="text" id="reg-name" placeholder="John Doe" required>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-email">Email Address</label>
+                    <input type="email" id="reg-email" placeholder="johndoe@gmail.com" required>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" placeholder="At least 6 characters" required>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-confirm-password">Confirm Password</label>
+                    <input type="password" id="reg-confirm-password" placeholder="Re-enter password" required>
+                    <div class="error-message"></div>
+                </div>
+
+                <button type="submit">Register</button>
+            </form>
+
+            <p class="info-text">Already have an account? <span style="color: #667eea; cursor: pointer; font-weight: 600;" onclick="switchTab('login')">Login here</span></p>
+        </div>
+
+        <!-- Login Section -->
+        <div id="login" class="form-section">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Login to your account</p>
+            <div id="login-message" class="message"></div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" placeholder="johndoe@gmail.com" required>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                    <div class="error-message"></div>
+                </div>
+
+                <button type="submit">Login</button>
+            </form>
+
+            <p class="info-text">Don't have an account? <span style="color: #667eea; cursor: pointer; font-weight: 600;" onclick="switchTab('register')">Register here</span></p>
+        </div>
+    </div>
+
+    <script>
+        // ========== TAB SWITCHING ==========
+        function switchTab(tabName) {
+            // Hide all sections
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked button
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+            // Clear messages and reset forms
+            clearMessages();
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                switchTab(e.target.dataset.tab);
+            });
+        });
+
+        // ========== VALIDATION FUNCTIONS ==========
+        function validateEmail(email) {
+            return email.includes('@') && email.includes('.');
+        }
+
+        function validatePassword(password) {
+            return password.length >= 6;
+        }
+
+        function clearMessages() {
+            document.querySelectorAll('.message').forEach(msg => {
+                msg.classList.remove('show', 'success', 'error');
+            });
+            document.querySelectorAll('input').forEach(input => {
+                input.classList.remove('error');
+            });
+            document.querySelectorAll('.error-message').forEach(msg => {
+                msg.classList.remove('show');
+            });
+        }
+
+        function showMessage(formType, message, type) {
+            const messageEl = document.getElementById(`${formType}-message`);
+            messageEl.textContent = message;
+            messageEl.classList.add('show', type);
+
+            // Auto-hide success messages after 3 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageEl.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // ========== REGISTER FORM ==========
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            clearMessages();
+
+            const name = document.getElementById('reg-name').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm-password').value;
+
+            let isValid = true;
+
+            // Validation checks
+            if (!name) {
+                showFieldError('reg-name', 'Name is required');
+                isValid = false;
+            }
+
+            if (!email) {
+                showFieldError('reg-email', 'Email is required');
+                isValid = false;
+            } else if (!validateEmail(email)) {
+                showFieldError('reg-email', 'Email must contain "@"');
+                isValid = false;
+            }
+
+            if (!password) {
+                showFieldError('reg-password', 'Password is required');
+                isValid = false;
+            } else if (!validatePassword(password)) {
+                showFieldError('reg-password', 'Password must be at least 6 characters');
+                isValid = false;
+            }
+
+            if (!confirmPassword) {
+                showFieldError('reg-confirm-password', 'Confirm password is required');
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                showFieldError('reg-confirm-password', 'Passwords do not match');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Check if email already exists
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            if (users.some(user => user.email === email)) {
+                showMessage('register', '❌ Email already registered. Please login or use another email.', 'error');
+                return;
+            }
+
+            // Save user to localStorage
+            users.push({ name, email, password });
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Show success message
+            showMessage('register', '✅ Registration Successful! Now, you can log in.', 'success');
+
+            // Clear form
+            document.getElementById('register-form').reset();
+
+            // Switch to login tab after 2 seconds
+            setTimeout(() => {
+                switchTab('login');
+            }, 2000);
+        });
+
+        // ========== LOGIN FORM ==========
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            clearMessages();
+
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+
+            if (!email || !password) {
+                showMessage('login', '❌ All fields are required', 'error');
+                return;
+            }
+
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Find matching user
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                // Store logged-in user info
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                showMessage('login', `✅ Login Successful! Welcome, ${user.name}!`, 'success');
+                      window.location.href = "./courses.html";
+                // Clear form
+                document.getElementById('login-form').reset();
+
+                // Update UI to show logged-in state
+                setTimeout(() => {
+                    location.reload(); // Reload to update UI
+                }, 2000);
+            } else {
+                showMessage('login', '❌ Invalid email or password', 'error');
+            }
+        });
+
+        // ========== HELPER FUNCTION ==========
+        function showFieldError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            field.classList.add('error');
+            field.parentElement.querySelector('.error-message').textContent = message;
+            field.parentElement.querySelector('.error-message').classList.add('show');
+        }
+
+        // ========== CHECK IF USER IS LOGGED IN ON PAGE LOAD ==========
+       window.addEventListener('load', () => {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+        // User is logged in
+        document.getElementById('logoutSection').style.display = 'block';
+    } else {
+        // User is logged out
+        document.getElementById('logoutSection').style.display = 'none';
+    }
+});
+        function logout() {
+            localStorage.removeItem('currentUser');
+            location.reload();
+        }
+    </script>
+</body>
+</html>
